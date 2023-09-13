@@ -1,8 +1,17 @@
+import me.krob.Application;
+
+import java.io.File;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
 
 public class Main {
+    public static void main(String[] args) {
+        new Application();
+    }
+
+
+    /*
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         Map<Module, Grade> modules = new HashMap<>();
@@ -82,4 +91,5 @@ public class Main {
             return value;
         }
     }
+     */
 }

@@ -1,3 +1,5 @@
+package me.krob.config;
+
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import lombok.RequiredArgsConstructor;
