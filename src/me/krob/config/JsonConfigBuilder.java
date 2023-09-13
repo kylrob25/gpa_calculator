@@ -5,6 +5,7 @@ import com.google.gson.GsonBuilder;
 import lombok.RequiredArgsConstructor;
 
 import java.io.*;
+import java.nio.file.Files;
 
 @RequiredArgsConstructor
 public class JsonConfigBuilder<C> {
@@ -19,7 +20,7 @@ public class JsonConfigBuilder<C> {
     }
 
     public C loadFile() {
-        try (BufferedReader reader = new BufferedReader(new InputStreamReader(new FileInputStream(file)))) {
+        try (BufferedReader reader = new BufferedReader(new InputStreamReader(Files.newInputStream(file.toPath())))) {
             return (C) GSON.fromJson(reader, clazz);
         } catch (IOException exception) {
             return createFile();
@@ -30,15 +31,15 @@ public class JsonConfigBuilder<C> {
         try (FileWriter writer = new FileWriter(file)) {
             writer.write(toJsonString());
             writer.flush();
-        } catch (IOException | InstantiationException | IllegalAccessException exception) {
-            exception.printStackTrace();
+        } catch (Throwable throwable) {
+            throwable.printStackTrace();
             return null;
         }
 
         return loadFile();
     }
 
-    public String toJsonString() throws InstantiationException, IllegalAccessException {
-        return GSON.toJson(clazz.newInstance());
+    public String toJsonString() throws Throwable {
+        return GSON.toJson(clazz.getDeclaredConstructor().newInstance());
     }
 }

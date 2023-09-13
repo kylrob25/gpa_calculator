@@ -10,6 +10,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
 
+// TODO: Move to GUI system
 public class Application implements Runnable {
 
     private final ModuleConfig moduleConfig;
@@ -19,7 +20,6 @@ public class Application implements Runnable {
         JsonConfigBuilder<ModuleConfig> configBuilder = new JsonConfigBuilder<>(configFile, ModuleConfig.class);
 
         configBuilder.makeParent();
-
         moduleConfig = configBuilder.loadFile();
     }
 
@@ -29,6 +29,7 @@ public class Application implements Runnable {
 
         for (Module module : moduleConfig.getModules()) {
             System.out.printf("Enter the Final Grade for %s%n", module.getName());
+
             try {
                 Grade grade = Grade.valueOf(scanner.next().toUpperCase());
                 modules.put(module, grade);
@@ -37,6 +38,12 @@ public class Application implements Runnable {
             }
         }
 
+        double rounded = getRounded(modules);
+
+        System.out.printf("Your GPA is %.2f%n", rounded);
+    }
+
+    private double getRounded(Map<Module, Grade> modules) {
         double totalGradePoints = 0;
         double totalModuleValue = 0;
 
@@ -49,8 +56,7 @@ public class Application implements Runnable {
         }
 
         double points = totalGradePoints / totalModuleValue;
-        double rounded = (double) Math.round(points * 100) / 100;
 
-        System.out.printf("Your GPA is %.2f%n", rounded);
+        return (double) Math.round(points * 100) / 100;
     }
 }
