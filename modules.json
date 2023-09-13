@@ -1,0 +1,11 @@
+{
+  "modules": [
+    {"name": "Web Site Development", "value": 20 },
+    {"name": "Database Applications", "value": 20 },
+    {"name": "Professional Computing Practice", "value": 20 },
+    {"name": "Business Intelligence (Computing)", "value": 10 },
+    {"name": "Advanced Programming for Mobile Devices", "value": 20 },
+    {"name": "Information Security Management", "value": 20 },
+    {"name": "Research Methods in Computing", "value": 10}
+  ]
+}
