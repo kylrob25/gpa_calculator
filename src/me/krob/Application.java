@@ -7,10 +7,12 @@ import me.krob.module.Module;
 import java.io.File;
 
 public class Application {
+
+    private final ModuleConfig moduleConfig;
+
     public Application() {
         File configFile = new File("./modules.json");
-        ModuleConfig moduleConfig = new ModuleConfig();
-        JsonConfigBuilder<ModuleConfig> configBuilder = new JsonConfigBuilder<>(configFile, moduleConfig);
+        JsonConfigBuilder<ModuleConfig> configBuilder = new JsonConfigBuilder<>(configFile, ModuleConfig.class);
 
         configBuilder.makeParent();
 

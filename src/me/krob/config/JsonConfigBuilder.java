@@ -11,7 +11,7 @@ public class JsonConfigBuilder<C> {
     private static final Gson GSON = new GsonBuilder().setPrettyPrinting().create();
 
     private final File file;
-    private final C config;
+    private final Class<C> clazz;
 
     public void makeParent() {
         File parent = file.getParentFile();
@@ -20,7 +20,7 @@ public class JsonConfigBuilder<C> {
 
     public C loadFile() {
         try (BufferedReader reader = new BufferedReader(new InputStreamReader(new FileInputStream(file)))) {
-            return (C) GSON.fromJson(reader, config.getClass());
+            return (C) GSON.fromJson(reader, clazz);
         } catch (IOException exception) {
             return createFile();
         }
@@ -30,7 +30,7 @@ public class JsonConfigBuilder<C> {
         try (FileWriter writer = new FileWriter(file)) {
             writer.write(toJsonString());
             writer.flush();
-        } catch (IOException exception) {
+        } catch (IOException | InstantiationException | IllegalAccessException exception) {
             exception.printStackTrace();
             return null;
         }
@@ -38,7 +38,7 @@ public class JsonConfigBuilder<C> {
         return loadFile();
     }
 
-    public String toJsonString() {
-        return GSON.toJson(config);
+    public String toJsonString() throws InstantiationException, IllegalAccessException {
+        return GSON.toJson(clazz.newInstance());
     }
 }
