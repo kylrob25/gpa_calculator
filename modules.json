@@ -1,11 +1,11 @@
 {
   "modules": [
-    {"name": "Web Site Development", "value": 20 },
-    {"name": "Database Applications", "value": 20 },
-    {"name": "Professional Computing Practice", "value": 20 },
-    {"name": "Business Intelligence (Computing)", "value": 10 },
-    {"name": "Advanced Programming for Mobile Devices", "value": 20 },
-    {"name": "Information Security Management", "value": 20 },
-    {"name": "Research Methods in Computing", "value": 10}
+    {"name": "Web Site Development", "weight": 20 },
+    {"name": "Database Applications", "weight": 20 },
+    {"name": "Professional Computing Practice", "weight": 20 },
+    {"name": "Business Intelligence (Computing)", "weight": 10 },
+    {"name": "Advanced Programming for Mobile Devices", "weight": 20 },
+    {"name": "Information Security Management", "weight": 20 },
+    {"name": "Research Methods in Computing", "weight": 10}
   ]
 }

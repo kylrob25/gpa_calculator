@@ -1,10 +1,27 @@
 # GPA Calculator
 
-Simple console application that calculates your university grade point average using a common formula:
+Simple console application that calculates your university grade point average using a common formula.
 
+**Formula**
 - Module weight is calculated by dividing the credit amount by 20 (e.g: 20 credits / 20 = 1)
 - Grade point value is a based on your letter grade (e.g: A1 = 4.0)
+- GPA is then calculated by dividing these totals (e.g: 335 / 120 = 2.79)
 
-Total module weight divided by your total grade point value gives us your grade point average.
+**Module Configuration**
+```json
+{
+  "modules": [
+    {"name": "Web Site Development", "weight": 20 },
+    {"name": "Database Applications", "weight": 20 },
+    {"name": "Professional Computing Practice", "weight": 20 },
+    {"name": "Business Intelligence (Computing)", "weight": 10 },
+    {"name": "Advanced Programming for Mobile Devices", "weight": 20 },
+    {"name": "Information Security Management", "weight": 20 },
+    {"name": "Research Methods in Computing", "weight": 10}
+  ]
+}
+
+```
+
 
 
