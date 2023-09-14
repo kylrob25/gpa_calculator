@@ -2,12 +2,10 @@ package me.krob.config;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import lombok.RequiredArgsConstructor;
 
 import java.io.*;
 import java.nio.file.Files;
 
-@RequiredArgsConstructor
 public class JsonConfigBuilder<C> {
     private static final Gson GSON = new GsonBuilder().setPrettyPrinting().create();
 

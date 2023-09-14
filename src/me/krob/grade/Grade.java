@@ -1,5 +1,8 @@
 package me.krob.grade;
 
+import lombok.Getter;
+
+@Getter
 public enum Grade {
     A1(4.0),
     A2(3.5),
@@ -17,7 +20,4 @@ public enum Grade {
         this.value = value;
     }
 
-    public double getValue() {
-        return value;
-    }
 }
