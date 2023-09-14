@@ -1,7 +1,6 @@
 package me.krob;
 
 import me.krob.config.JsonConfigBuilder;
-import me.krob.config.ModuleConfig;
 import me.krob.grade.Grade;
 import me.krob.module.Module;
 
@@ -12,37 +11,39 @@ import java.util.Scanner;
 // TODO: Move to GUI system
 public class Application implements Runnable {
 
-    private final ModuleConfig moduleConfig;
+    private final Module[] modules;
 
     public Application() {
-        JsonConfigBuilder<ModuleConfig> configBuilder =
-                new JsonConfigBuilder<>(ModuleConfig.class, "./modules.json");
+        JsonConfigBuilder<Module[]> configBuilder =
+                new JsonConfigBuilder<>(Module[].class, "./modules.json");
 
         configBuilder.makeParent();
-        moduleConfig = configBuilder.loadFile();
+        modules = configBuilder.loadFile();
     }
 
     public void run() {
         Scanner scanner = new Scanner(System.in);
         Map<Module, Grade> modules = new HashMap<>();
 
-        for (Module module : moduleConfig.getModules()) {
-            System.out.printf("Enter the Final Grade for %s%n", module.getName());
-
-            try {
-                Grade grade = Grade.valueOf(scanner.next().toUpperCase());
-                modules.put(module, grade);
-            } catch (Throwable throwable) {
-                System.exit(1);
+        for (Module module : this.modules) {
+            while (!modules.containsKey(module)) {
+                System.out.printf("Enter the final grade for %s%n", module.getName());
+                try {
+                    Grade grade = Grade.valueOf(scanner.next().toUpperCase());
+                    modules.put(module, grade);
+                } catch (Throwable throwable) {
+                    System.out.println("Please enter a valid letter grade.");
+                }
             }
         }
 
-        double rounded = getRounded(modules);
+        double gpa = getGradePointAverage(modules);
+        double rounded = (double) Math.round(gpa * 100) / 100;
 
         System.out.printf("Your GPA is %.2f%n", rounded);
     }
 
-    private double getRounded(Map<Module, Grade> modules) {
+    private double getGradePointAverage(Map<Module, Grade> modules) {
         double totalGradePoints = 0;
         double totalModuleWeight = 0;
 
@@ -54,8 +55,6 @@ public class Application implements Runnable {
             totalModuleWeight += (module.getWeight());
         }
 
-        double points = totalGradePoints / totalModuleWeight;
-
-        return (double) Math.round(points * 100) / 100;
+        return totalGradePoints / totalModuleWeight;
     }
 }

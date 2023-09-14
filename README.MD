@@ -9,17 +9,15 @@ Simple console application that calculates your university grade point average u
 
 **Module Configuration**
 ```json
-{
-  "modules": [
-    {"name": "Web Site Development", "weight": 20 },
-    {"name": "Database Applications", "weight": 20 },
-    {"name": "Professional Computing Practice", "weight": 20 },
-    {"name": "Business Intelligence (Computing)", "weight": 10 },
-    {"name": "Advanced Programming for Mobile Devices", "weight": 20 },
-    {"name": "Information Security Management", "weight": 20 },
-    {"name": "Research Methods in Computing", "weight": 10}
-  ]
-}
+[
+  {"name": "Web Site Development", "weight": 20 },
+  {"name": "Database Applications", "weight": 20 },
+  {"name": "Professional Computing Practice", "weight": 20 },
+  {"name": "Business Intelligence (Computing)", "weight": 10 },
+  {"name": "Advanced Programming for Mobile Devices", "weight": 20 },
+  {"name": "Information Security Management", "weight": 20 },
+  {"name": "Research Methods in Computing", "weight": 10}
+]
 
 ```
 
