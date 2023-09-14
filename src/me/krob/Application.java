@@ -5,7 +5,6 @@ import me.krob.config.ModuleConfig;
 import me.krob.grade.Grade;
 import me.krob.module.Module;
 
-import java.io.File;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
@@ -16,8 +15,8 @@ public class Application implements Runnable {
     private final ModuleConfig moduleConfig;
 
     public Application() {
-        File configFile = new File("./modules.json");
-        JsonConfigBuilder<ModuleConfig> configBuilder = new JsonConfigBuilder<>(configFile, ModuleConfig.class);
+        JsonConfigBuilder<ModuleConfig> configBuilder =
+                new JsonConfigBuilder<>(ModuleConfig.class, "./modules.json");
 
         configBuilder.makeParent();
         moduleConfig = configBuilder.loadFile();
@@ -45,17 +44,17 @@ public class Application implements Runnable {
 
     private double getRounded(Map<Module, Grade> modules) {
         double totalGradePoints = 0;
-        double totalModuleValue = 0;
+        double totalModuleWeight = 0;
 
         for (Map.Entry<Module, Grade> entry: modules.entrySet()) {
             Module module = entry.getKey();
             Grade grade = entry.getValue();
 
-            totalGradePoints += (grade.getValue() * module.getValue());
-            totalModuleValue += (module.getValue());
+            totalGradePoints += (grade.getValue() * module.getWeight());
+            totalModuleWeight += (module.getWeight());
         }
 
-        double points = totalGradePoints / totalModuleValue;
+        double points = totalGradePoints / totalModuleWeight;
 
         return (double) Math.round(points * 100) / 100;
     }

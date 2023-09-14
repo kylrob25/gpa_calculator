@@ -11,8 +11,14 @@ import java.nio.file.Files;
 public class JsonConfigBuilder<C> {
     private static final Gson GSON = new GsonBuilder().setPrettyPrinting().create();
 
-    private final File file;
     private final Class<C> clazz;
+
+    private File file;
+
+    public JsonConfigBuilder(Class<C> clazz, String fileName) {
+        this.clazz = clazz;
+        this.file = new File(fileName);
+    }
 
     public void makeParent() {
         File parent = file.getParentFile();
