@@ -10,8 +10,7 @@ public class JsonConfigBuilder<C> {
     private static final Gson GSON = new GsonBuilder().setPrettyPrinting().create();
 
     private final Class<C> clazz;
-
-    private File file;
+    private final File file;
 
     public JsonConfigBuilder(Class<C> clazz, String fileName) {
         this.clazz = clazz;
@@ -25,7 +24,7 @@ public class JsonConfigBuilder<C> {
 
     public C loadFile() {
         try (BufferedReader reader = new BufferedReader(new InputStreamReader(Files.newInputStream(file.toPath())))) {
-            return (C) GSON.fromJson(reader, clazz);
+            return GSON.fromJson(reader, clazz);
         } catch (IOException exception) {
             return createFile();
         }

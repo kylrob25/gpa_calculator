@@ -5,10 +5,14 @@ import lombok.Getter;
 @Getter
 public class Module {
     private final String name;
-    private final double weight;
+    private final double credits;
 
     public Module(String name, int credits) {
         this.name = name;
-        this.weight = (double) credits / 20;
+        this.credits = credits;
+    }
+
+    public double getWeight() {
+        return credits / 20.0;
     }
 }
